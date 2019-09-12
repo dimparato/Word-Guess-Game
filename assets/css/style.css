@@ -1,0 +1,14 @@
+html {
+  margin: auto;
+  background: darkgreen;
+  background-image: url(../images/3px-tile.png);
+}
+
+div {
+  text-align: center;
+  font-size: 4rem;
+  color: red;
+  font-family: 'Press Start 2P', cursive;
+  background: darkgreen;
+  background-image: url(../images/3px-tile.png);
+}
