@@ -7,16 +7,17 @@ function Game() {
     var wins=0;
     var losses=0;
     var hidden = [];
-    var mistakes = 0;
+    var mistakes=0;
     var alpha = [];
-    var repeats = 0;
+    var repeats=0;
 
     word = words[Math.floor(Math.random()*words.length)];
     for (let i=0; i < word.length; i++){
         hidden.push("_");
     }
+
     document.getElementById("currentWord").textContent = hidden.join("");
-    document.getElementById("gamePrompt").textContent = "Guess a letter! Mess up 5 times and you lose!";
+    document.getElementById("gamePrompt").textContent = "Guess a letter! Mess up 10 times and you lose!";
     document.getElementById("mistakes").textContent = "Mistakes = " + mistakes;
     document.getElementById("wins").textContent = "Wins = " + wins;
     document.getElementById("losses").textContent = "Losses = " + losses;
@@ -39,44 +40,39 @@ function Game() {
         if (hits==0){
             mistakes++;
             hits=0;
-            repeats = 0;
+            repeats=0;
             document.getElementById("mistakes").textContent = "Mistakes = " + mistakes;
-            if (mistakes==5){
+            if (mistakes==10){
                 losses++;
-                hidden = [];
-                overallHits=0;
-                mistakes = 0;
-                alpha = [];
-                word = words[Math.floor(Math.random()*words.length)];
-                for (let i=0; i < word.length; i++){
-                    hidden.push("_");
-                }
-                document.getElementById("currentWord").textContent = hidden.join("");
-                document.getElementById("mistakes").textContent = "Mistakes = " + mistakes;
-                document.getElementById("wins").textContent = "Wins = " + wins;
-                document.getElementById("losses").textContent = "Losses = " + losses;
+                gameReset();
             }
         }
         else if (overallHits == word.length) {
             wins++;
-            hits=0;
-            overallHits=0;
-            hidden = [];
-            mistakes=0;
-            alpha = [];
-            repeats = 0;
-            word = words[Math.floor(Math.random()*words.length)];
-            for (let i=0; i < word.length; i++){
-                hidden.push("_");
-            }
-            document.getElementById("currentWord").textContent = hidden.join("");
-            document.getElementById("mistakes").textContent = "Mistakes = " + mistakes;
-            document.getElementById("wins").textContent = "Wins = " + wins;
-            document.getElementById("losses").textContent = "Losses = " + losses;
+            gameReset();
         }
         else {
             repeats=0;
             hits=0;
         }
     });
+
+    function gameReset() {
+        hits=0;
+        overallHits=0;
+        hidden = [];
+        mistakes=0;
+        alpha = [];
+        repeats=0;
+
+        word = words[Math.floor(Math.random()*words.length)];
+        for (let i=0; i < word.length; i++){
+            hidden.push("_");
+        }
+
+        document.getElementById("currentWord").textContent = hidden.join("");
+        document.getElementById("mistakes").textContent = "Mistakes = " + mistakes;
+        document.getElementById("wins").textContent = "Wins = " + wins;
+        document.getElementById("losses").textContent = "Losses = " + losses;
+    }
 }
